@@ -103,7 +103,9 @@ html{font-size:18px}body{font-size:18px;line-height:1.6}.topbar{height:84px}.top
  .content{padding-left:10px;padding-right:10px}.card{border-radius:9px}.section{padding:14px 0}.info{overflow-wrap:anywhere}.progress-head,.resultTop,.plot-caption{align-items:flex-start;flex-direction:column;gap:5px}
  .compact-upload .browse{font-size:14px}.plot-tools{grid-template-columns:1fr 1fr}.scatter-wrap{border-width:1px}.axis-controls{padding:10px}.axis-controls input[type=number]{font-size:16px}
 }
-</style></head><body>
+
+.pwa-update-notice{position:fixed;right:16px;bottom:16px;z-index:9999;border:0;border-radius:9px;background:#17243a;color:#fff;padding:12px 16px;font-weight:800;box-shadow:0 8px 24px #17243a55;cursor:pointer}@media(max-width:520px){.pwa-update-notice{left:10px;right:10px;width:calc(100% - 20px)}}
+</style><meta content="#071a3a" name="theme-color"/><meta content="Particle Charge Calculator 2D" name="application-name"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="default" name="apple-mobile-web-app-status-bar-style"/><meta content="Particle Charge 2D" name="apple-mobile-web-app-title"/><link href="./manifest.webmanifest" rel="manifest"/><link href="./favicon.png" rel="icon" sizes="32x32" type="image/png"/><link href="./icons/icon-180.png" rel="apple-touch-icon" sizes="180x180"/></head><body>
 <div class="shell"><main class="main"><header class="topbar"><div class="topIdentity"><span class="topMark">◈</span><div><strong>Particle Charge Calculator</strong><small>2D electrostatic trajectory analysis</small></div></div><div class="instance-controls"><button class="instance-button" id="saveInstance" type="button">↓ Save instance</button><button class="instance-button" id="loadInstance" type="button">↑ Load instance</button><input accept=".json,application/json" hidden="" id="instanceFile" type="file"/></div><button class="secondary" id="aboutBtn">About</button></header><div class="content"><section class="heading"><div><div class="kicker">ELECTROSTATIC PARTICLE ANALYSIS</div><h1>Particle charge calculator 2D</h1><p>Work backwards from particle landing position to estimate its charge.</p></div><div class="badge">● READY TO CALCULATE</div></section><div aria-label="Calculation workspace" class="workspace-tabs" role="tablist">
 <button aria-controls="singleTab" aria-selected="false" class="workspace-tab" data-tab="singleTab" id="singleTabButton" role="tab"><span>01</span><strong>Single particle</strong><small>Calculate one particle charge</small></button>
 <button aria-controls="batchTab" aria-selected="true" class="workspace-tab active" data-tab="batchTab" id="batchTabButton" role="tab"><span>02</span><strong>Batch analysis</strong><small>Process a particle data file</small></button>
@@ -406,4 +408,29 @@ document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{state.mode=+b.datas
 document.querySelectorAll('.browse').forEach(b=>b.onclick=()=>$(b.dataset.for).click());$('fieldFile').onchange=e=>e.target.files[0]&&readField(e.target.files[0]).catch(e=>toast(e.message));$('particleFile').onchange=e=>e.target.files[0]&&readParticles(e.target.files[0]).catch(e=>toast(e.message));[['fieldDrop','fieldFile',readField],['particleDrop','particleFile',readParticles]].forEach(([z,i,fn])=>{const el=$(z);el.ondragover=e=>{e.preventDefault();el.classList.add('drag')};el.ondragleave=()=>el.classList.remove('drag');el.ondrop=e=>{e.preventDefault();el.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)fn(f).catch(e=>toast(e.message))}});
 $('resetBtn').onclick=()=>{Object.entries(defaults).forEach(([k,v])=>{if($(k))$(k).value=v;if($('batch_'+k))$('batch_'+k).value=v});document.querySelector('.mode[data-mode="0"]').click();state.single=null;$('chargeResult').innerHTML='— <small>C</small>';$('resultNote').textContent='Enter your setup and run a calculation.';['massResult','vtResult','reResult','cdResult','timeResult','xResult'].forEach(id=>$(id).textContent='—');$('exportSingle').disabled=true};$('aboutBtn').onclick=()=>$('aboutDialog').showModal();$('closeAbout').onclick=()=>$('aboutDialog').close();$('workerHint').textContent=`Uses ${Math.max(1,navigator.hardwareConcurrency||4)} available processor threads`;
 })();
-</script></body></html>
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('./service-worker.js', { scope: './' });
+      registration.addEventListener('updatefound', () => {
+        const worker = registration.installing;
+        if (!worker) return;
+        worker.addEventListener('statechange', () => {
+          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+            const notice = document.createElement('button');
+            notice.className = 'pwa-update-notice';
+            notice.textContent = 'Update available - reload';
+            notice.addEventListener('click', () => location.reload());
+            document.body.appendChild(notice);
+          }
+        });
+      });
+    } catch (error) {
+      console.warn('Service worker registration failed:', error);
+    }
+  });
+}
+</script>
+</body></html>
