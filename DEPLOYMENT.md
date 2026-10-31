@@ -1,6 +1,12 @@
-# Particle Charge Calculator 2D - Release 1.9.2
+# Particle Charge Calculator 2D - Release 1.9.4
 
 Target: https://frozentrone.github.io/aeros/
+
+## Changes
+- Plot Zoom, Zoom Out, Reset, PNG and CSV controls reduced to the same control height/typographic scale as the Crosshair control.
+- Automatic X-axis limits now use a nice-number rounding algorithm (1, 2, 5 × powers of ten) after padding, reducing unnecessary decimal precision while still enclosing the plotted data.
+- Previous 1.9.3 labels retained: Particle Size (um) on all Y axes and Specific Charge on Plot 3 X axis.
+- Version/cache references incremented to 1.9.4.
 
 ## Replace/add in repository root
 - index.html
@@ -9,15 +15,15 @@ Target: https://frozentrone.github.io/aeros/
 - version.json
 - offline.html
 
-## Preserve from the existing repository
+## Preserve
 - favicon.png
-- icons/ (all existing icon assets)
+- icons/
 - README.md
 
-Do not delete the existing favicon or icons directory. This package deliberately does not contain replacement binary icon assets.
-
 ## Verification
-1. Commit all five release files together to the GitHub Pages publishing branch/root.
-2. Open the deployed site online once and reload once so version 1.9.2 controls the page.
-3. Confirm installation remains available and the app opens after disconnecting from the network.
-4. Confirm version.json returns 1.9.2 and service-worker.js contains pccc-v1.9.2.
+1. Confirm the header displays v1.9.4.
+2. Confirm Zoom, Zoom Out, Reset, PNG, CSV and Crosshair controls have matching compact height.
+3. Process data spanning decimal-valued X ranges and confirm automatic X minima/maxima are rounded outward to concise limits and still contain all points.
+4. Confirm all three Y-axis labels remain Particle Size (um) and Plot 3 X axis remains Specific Charge.
+5. Confirm version.json reads 1.9.4 and service-worker cache is pccc-v1.9.4.
+6. Confirm the PWA loads offline after one successful online load.
