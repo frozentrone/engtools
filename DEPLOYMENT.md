@@ -1,28 +1,17 @@
-# PCCC 1.11.0 - Multi-sample comparison
+# PCCC 1.12.0 - Genuine interactive 3D comparison
 
 Target: https://frozentrone.github.io/pccc/
 
-## New feature
-Tab 04 Sample comparison loads multiple saved PCCC JSON instances and visualises their already-analysed batch results without rerunning the solver.
+## Major comparison change
+The previous canvas pseudo-3D renderer has been replaced with a genuine Plotly.js WebGL 3D scene for the 3D Stacked comparison view.
 
-### Views
-- 2D Overlay
-- Small Multiples
-- 3D Stacked, with each JSON/sample on its own scatter plane along Z
-
-### Metrics
-- Particle Size vs Corrected X
-- Particle Size vs Charge
-- Particle Size vs Specific Charge
-
-### Sample management
-- Multiple JSON selection
-- Independent colours
-- Rename samples
-- Show/hide samples
-- Remove individual samples
-- Clear all
-- Z-layer spacing control
-- Pointer-drag view adjustment for stacked 3D
-
-Existing Single Particle, Batch Analysis, Processed Data Plot, Save/Load Instance, plot controls and offline PWA functionality are retained.
+- X = selected particle metric
+- Y = Particle Size (µm)
+- Z = sample layer
+- Each sample is a separate scatter3d trace at its own Z coordinate
+- A translucent mesh plane marks each sample layer
+- True orbit camera, pan/zoom interaction, wheel zoom, Plotly 3D modebar and PNG export
+- Sample names are Z tick labels
+- Hover identifies sample, particle ID and values
+- Local plotly.min.js is included and precached so the 3D renderer remains available offline
+- 2D Overlay and Small Multiples remain available using the existing renderer
