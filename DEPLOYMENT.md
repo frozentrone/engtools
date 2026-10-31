@@ -1,13 +1,13 @@
-# PCCC 1.12.2 - Adjustable 3D sample spacing
+# PCCC 1.12.3 - Sample spacing fix
 
 Target: https://frozentrone.github.io/pccc/
 
-## Changes
-- Replaced the obsolete Depth control with a functional `Sample spacing` slider.
-- Range: 0.20× to 5.00× in 0.05× increments.
-- The slider genuinely changes each sample's Z coordinate in the Plotly WebGL scene.
-- Sample planes, scatter points, Z tick positions and Z-axis range all update together.
-- A live numeric readout shows the current spacing multiplier.
-- Reset View returns spacing to 1.00×.
-- X and Y scientific values are not changed by sample spacing.
-- Offline Plotly bundle and all previous comparison modes are retained.
+## Fix
+In 1.12.2 the slider scaled the sample Z coordinates and the Z-axis range by the same factor. Plotly therefore normalised the changed coordinates back into essentially the same visible depth, so spacing appeared almost unchanged.
+
+1.12.3 keeps sample categories at fixed Z coordinates (0, 1, 2, ...), and the slider instead changes the physical Z aspect ratio of the genuine 3D scene. This makes separation visibly contract or expand without changing X/Y scientific values or sample identity.
+
+- Sample spacing range: 0.15× to 4.00×.
+- 1.00× is the default.
+- Scatter points, sample planes and categorical Z labels remain aligned.
+- Reset View restores 1.00×.
