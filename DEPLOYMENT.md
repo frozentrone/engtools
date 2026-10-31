@@ -1,11 +1,13 @@
-# PCCC 1.12.1 - 3D comparison layout fix
+# PCCC 1.12.2 - Adjustable 3D sample spacing
 
 Target: https://frozentrone.github.io/pccc/
 
-## Fix
-The inactive 2D comparison canvas was still occupying its fixed 650 px height when the Plotly 3D renderer was active. The application's author CSS was overriding the browser's default `[hidden]` styling, creating the large blank area visible above the 3D scene.
-
-- Hidden comparison renderers now explicitly use `display: none !important`.
-- Only the active 2D or 3D renderer occupies layout space.
-- The Plotly 3D viewport uses a responsive height bounded for desktop and mobile.
-- The genuine WebGL 3D renderer, axes, sample layers, camera controls and offline Plotly bundle are preserved.
+## Changes
+- Replaced the obsolete Depth control with a functional `Sample spacing` slider.
+- Range: 0.20× to 5.00× in 0.05× increments.
+- The slider genuinely changes each sample's Z coordinate in the Plotly WebGL scene.
+- Sample planes, scatter points, Z tick positions and Z-axis range all update together.
+- A live numeric readout shows the current spacing multiplier.
+- Reset View returns spacing to 1.00×.
+- X and Y scientific values are not changed by sample spacing.
+- Offline Plotly bundle and all previous comparison modes are retained.
