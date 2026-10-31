@@ -1,43 +1,17 @@
 {
-  "id": "/pccc/",
   "name": "Particle Charge Calculator 2D",
   "short_name": "Particle Charge 2D",
-  "description": "Offline-capable 2D electrostatic particle trajectory and charge analysis.",
-  "start_url": "/pccc/",
-  "scope": "/pccc/",
+  "description": "2D electrostatic particle trajectory and charge analysis.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "any",
-  "background_color": "#f4f7fb",
+  "background_color": "#f5f7fa",
   "theme_color": "#071a3a",
-  "categories": [
-    "science",
-    "utilities",
-    "education"
-  ],
+  "lang": "en-GB",
+  "version": "1.9.2",
   "icons": [
-    {
-      "src": "/pccc/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/pccc/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/pccc/icons/icon-maskable-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/pccc/icons/icon-maskable-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
+    { "src": "./favicon.png?v=1.9.2", "sizes": "32x32", "type": "image/png" },
+    { "src": "./icons/icon-180.png?v=1.9.2", "sizes": "180x180", "type": "image/png" }
   ]
 }
