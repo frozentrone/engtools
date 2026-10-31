@@ -1,17 +1,11 @@
-# PCCC 1.12.0 - Genuine interactive 3D comparison
+# PCCC 1.12.1 - 3D comparison layout fix
 
 Target: https://frozentrone.github.io/pccc/
 
-## Major comparison change
-The previous canvas pseudo-3D renderer has been replaced with a genuine Plotly.js WebGL 3D scene for the 3D Stacked comparison view.
+## Fix
+The inactive 2D comparison canvas was still occupying its fixed 650 px height when the Plotly 3D renderer was active. The application's author CSS was overriding the browser's default `[hidden]` styling, creating the large blank area visible above the 3D scene.
 
-- X = selected particle metric
-- Y = Particle Size (µm)
-- Z = sample layer
-- Each sample is a separate scatter3d trace at its own Z coordinate
-- A translucent mesh plane marks each sample layer
-- True orbit camera, pan/zoom interaction, wheel zoom, Plotly 3D modebar and PNG export
-- Sample names are Z tick labels
-- Hover identifies sample, particle ID and values
-- Local plotly.min.js is included and precached so the 3D renderer remains available offline
-- 2D Overlay and Small Multiples remain available using the existing renderer
+- Hidden comparison renderers now explicitly use `display: none !important`.
+- Only the active 2D or 3D renderer occupies layout space.
+- The Plotly 3D viewport uses a responsive height bounded for desktop and mobile.
+- The genuine WebGL 3D renderer, axes, sample layers, camera controls and offline Plotly bundle are preserved.
