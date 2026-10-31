@@ -1,7 +1,7 @@
 'use strict';
-const APP_VERSION = '1.12.3';
+const APP_VERSION = '1.13.0';
 const CACHE_NAME = `pccc-v${APP_VERSION}`;
-const APP_SHELL = ['./','./index.html','./offline.html','./plotly.min.js?v=1.12.3','./favicon.png?v=1.12.3','./icons/icon-180.png?v=1.12.3'];
+const APP_SHELL = ['./','./index.html','./offline.html','./plotly.min.js?v=1.13.0','./favicon.png?v=1.13.0','./icons/icon-180.png?v=1.13.0'];
 const NEVER_CACHE = new Set(['service-worker.js','manifest.webmanifest','version.json']);
 self.addEventListener('install',event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE_NAME).then(async cache=>{for(const asset of APP_SHELL){try{await cache.add(new Request(asset,{cache:'reload'}));}catch(error){console.warn('[SW] Optional precache failed:',asset,error);}}}));});
 self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key)));await self.clients.claim();})());});

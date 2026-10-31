@@ -1,13 +1,11 @@
-# PCCC 1.12.3 - Sample spacing fix
+# PCCC 1.13.0 - Marker shapes + compact mobile header
 
 Target: https://frozentrone.github.io/pccc/
 
-## Fix
-In 1.12.2 the slider scaled the sample Z coordinates and the Z-axis range by the same factor. Plotly therefore normalised the changed coordinates back into essentially the same visible depth, so spacing appeared almost unchanged.
+## New comparison controls
+Each comparison sample now has both colour and marker-shape controls. Available shapes: Circle, Square, Diamond, Cross and X. Marker choice is applied to genuine Plotly 3D traces and the PCCC 2D Overlay/Small Multiples renderer.
 
-1.12.3 keeps sample categories at fixed Z coordinates (0, 1, 2, ...), and the slider instead changes the physical Z aspect ratio of the genuine 3D scene. This makes separation visibly contract or expand without changing X/Y scientific values or sample identity.
+## Mobile header redesign
+At <=720 px the fixed blue header now defaults to a compact single-row identity bar with a Menu control. Save/Load/About and detailed active-sample metadata are collapsed by default and can be expanded with Menu, then collapsed again with Close. Desktop behaviour is preserved.
 
-- Sample spacing range: 0.15× to 4.00×.
-- 1.00× is the default.
-- Scatter points, sample planes and categorical Z labels remain aligned.
-- Reset View restores 1.00×.
+The PWA release/cache references are updated to 1.13.0 and the local offline Plotly bundle is preserved.
